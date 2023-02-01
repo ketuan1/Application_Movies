@@ -1,2 +1,3 @@
 # react icon
-1.
+1 .npm install react-icons styled-components
+
