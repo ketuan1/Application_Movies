@@ -1,8 +1,12 @@
 import ReactPlayer from 'react-player';
-import { VscMute } from 'react-icons/vsc';
+import { VscMute, VscUnmute } from 'react-icons/vsc';
 import styled from 'styled-components';
+import { useState } from 'react';
 
 function Intro(props) {
+
+    const [isMuted, setIsMuted] = useState(false);
+
     return ( 
         <IntroContainer>
             <ReactPlayer
@@ -10,15 +14,23 @@ function Intro(props) {
                 width="100%"
                 height="100%"
                 volume={1}
-                mutex={false}
+                mutex={isMuted}
                 url='https://vimeo.com/145218574'
                 className='videoIntro'
             />
             <div className='infoIntro'>
-                <h1 className='header'>Netflix Elite</h1>
-                <p className='overview'>lorem ipsum dolor sit amet</p>
+                <h1 className='header'>NETFLIX / Juxtapose</h1>
+                <p className='overview'>NETFLIX / Juxtapose TBWA Chiat DayTore Frandsen / The Sweet Shop</p>
             </div>
-            <VscMute />
+                {/* if isMuted by true this <VscMute /> opposite <VscUnmute /> */}
+            {
+                isMuted ? (<VscMute onClick={() => setIsMuted(prev => !prev)} className='btn__volume' />)
+                    : (<VscUnmute onClick={() => setIsMuted(prev  => !prev)} className='btn__volume' />)
+            }
+            <div className='fade__bottom'>
+
+            </div>
+            
         </IntroContainer>
      );
 }
@@ -78,7 +90,47 @@ const IntroContainer = styled.div`
         @media screen and (max-width: 800px) {
             font-size: 14px;
         }
-    }
+      }
     }
 
+    .btn__volume {
+        position: absolute;
+        height: 40px;
+        width: 40px;
+        right: 10%;
+        top: 50%;
+        cursor: pointer;
+        border-radius: 50%;
+        padding: 6px;
+        color: #bbb;
+        border: 1px solid #fff;
+        transition: all 0.3s ease;
+        transform: scale(1);
+
+        &:hover {
+            color: #fff;
+            transform: scale(1.2);
+            background-color: rgba(211, 211, 211, 0.18);
+        }
+
+        @media screen and (max-width: 800px) {
+           height: 30px;
+           width: 30px;
+           padding: 4px;
+        }
+
+        @media screen and (max-width: 800px) {
+            height: 20px;
+            width: 20px;
+            padding: 1px;
+        }
+    }
+
+    .fade__bottom {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        background-image: linear-gradient(180deg, transparent, rgba(15, 15, 15, 0.6) 40%, rgb(17,17,17), rgb(17,17,17),)
+    }
 `;
