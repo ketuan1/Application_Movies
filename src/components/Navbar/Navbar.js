@@ -2,11 +2,27 @@ import NetflixLogo from '../../assets/images/netflix.png';
 import { FiSearch } from 'react-icons/fi';
 import styled from 'styled-components';
 import { useScrollY } from '../hook/useScrollY';
+import { useEffect, useState } from 'react';
 
 function Navbar(props) {
 
     //component scrollY
-    const [scrollY] = useScrollY();
+    //const [scrollY] = useScrollY();
+    //scrollY
+     const [scrollY, setScrollY] = useState(0);
+
+    function handlerScrollY() {
+        const scrollY = window.scrollY || document.documentElement.scrollTop;
+        setScrollY(scrollY)
+    }
+
+    useEffect(() => {
+        handlerScrollY();
+        window.addEventListener('scroll', handlerScrollY);
+        return () => {
+            window.removeEventListener('scroll', handlerScrollY);
+        }
+    }, []);
     
     return ( 
         // if scrollY < 50 this (backgroundColor: 'transparent') opposite this {backgroundColor: var(--color-background)
