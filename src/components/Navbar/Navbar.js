@@ -1,10 +1,16 @@
 import NetflixLogo from '../../assets/images/netflix.png';
 import { FiSearch } from 'react-icons/fi';
 import styled from 'styled-components';
+import { useScrollY } from '../hook/useScrollY';
 
 function Navbar(props) {
+
+    //component scrollY
+    const [scrollY] = useScrollY();
+    
     return ( 
-        <Navigation>
+        // if scrollY < 50 this (backgroundColor: 'transparent') opposite this {backgroundColor: var(--color-background)
+        <Navigation style={scrollY < 50 ? {backgroundColor: 'transparent'} : {backgroundColor: 'var(--color-background)'}}>
             <div className='navContainer'>
                 <div className='logo'>
                 <img src={NetflixLogo} alt="netflix" />
@@ -30,11 +36,11 @@ const Navigation = styled.div`
     z-index: 10;
 
     @media only  screen and (max-width: 600px) {
-        height: 100%;
+        height: 100px;
     }
 
     .navContainer {
-        background-color: var(--color-background);
+        background-color: transparent;
         display: flex;
         align-items: center;
         flex-direction: row;

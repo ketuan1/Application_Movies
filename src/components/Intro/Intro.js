@@ -5,16 +5,17 @@ import { useState } from 'react';
 
 function Intro(props) {
 
-    const [isMuted, setIsMuted] = useState(false);
+    const [isMuted, setIsMuted] = useState(true);
 
     return ( 
         <IntroContainer>
             <ReactPlayer
                 playing={true}
+                loop={true}
                 width="100%"
                 height="100%"
                 volume={1}
-                mutex={isMuted}
+                muted={isMuted}
                 url='https://vimeo.com/145218574'
                 className='videoIntro'
             />
@@ -24,8 +25,8 @@ function Intro(props) {
             </div>
                 {/* if isMuted by true this <VscMute /> opposite <VscUnmute /> */}
             {
-                isMuted ? (<VscMute onClick={() => setIsMuted(prev => !prev)} className='btn__volume' />)
-                    : (<VscUnmute onClick={() => setIsMuted(prev  => !prev)} className='btn__volume' />)
+                isMuted ? (<VscMute onClick={() => setIsMuted((prev) => !prev)} className='btn__volume' />)
+                    : (<VscUnmute onClick={() => setIsMuted((prev)  => !prev)} className='btn__volume' />)
             }
             <div className='fade__bottom'>
 
@@ -69,11 +70,11 @@ const IntroContainer = styled.div`
         transition: all 0.3s ease;
 
         @media screen and (max-width: 800px) {
-            left: 40px;
+            font-size: 40px;
         }
 
         @media screen and (max-width: 800px) {
-            left: 24px;
+            font-size: 24px;
         }
     }
     .overview {
